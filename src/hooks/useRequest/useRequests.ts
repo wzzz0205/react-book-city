@@ -1,6 +1,6 @@
-import useSWR, { SWRConfiguration, SWRResponse } from "swr";
-import { AxiosRequestConfig, AxiosError } from "axios";
-import AxiosInstance from "./axiosInstance";
+import useSWR, { SWRConfiguration, SWRResponse } from 'swr';
+import { AxiosRequestConfig, AxiosError } from 'axios';
+import AxiosInstance from './axiosInstance';
 
 interface Response<Data> {
   code: number;
@@ -9,29 +9,29 @@ interface Response<Data> {
 }
 
 interface useRequestResponse<Data, Error>
-  extends Pick<SWRResponse<Response<Data>, AxiosError<Error>>, 'isValidating' | 'error' | 'mutate'>{
-    data: Data | undefined;
-    response: Response<Data> | undefined
+  extends Pick<SWRResponse<Response<Data>, AxiosError<Error>>, 'isValidating' | 'error' | 'mutate'> {
+  data: Data | undefined;
+  response: Response<Data> | undefined;
 }
 
 function useRequest<Data = unknown, Error = unknown>(
   request: AxiosRequestConfig,
   config?: SWRConfiguration
-):useRequestResponse<Data,Error>{
+): useRequestResponse<Data, Error> {
   const {
     data: response,
     error,
     mutate,
-    isValidating
-  } = useSWR<Response<Data>,AxiosError<Error>>(request.url, () => AxiosInstance.request(request),config);
+    isValidating,
+  } = useSWR<Response<Data>, AxiosError<Error>>(request.url, () => AxiosInstance.request(request), config);
 
   return {
     data: response?.data,
     response,
     error,
     mutate,
-    isValidating
-  }
+    isValidating,
+  };
 }
 
 export default useRequest;
