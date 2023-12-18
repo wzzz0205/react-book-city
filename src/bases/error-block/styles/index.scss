@@ -1,0 +1,35 @@
+$class-prefix-error-block: 'wz-error-block';
+.#{$class-prefix-error-block} {
+  // -> .wz-error-block  #{解析变量}
+  --image-height: 200px;
+  --image-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transform: translateY(-10%);
+  &-image {
+    height: var(--image-height);
+    width: var(--image-width);
+    & svg {
+      height: 100%;
+    }
+  }
+
+  &-description {
+    font-size: var(--wz-font-size-s);
+    color: var(--wz-color-weak);
+    line-height: 1.4;
+    margin-top: 10px;
+    &-title {
+      font-size: var(--wz-font-size-m);
+    }
+    &-subtitle {
+      margin-top: 8px;
+    }
+  }
+}
